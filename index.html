@@ -1,59 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ramen Rater</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  <!-- Ensure the script is loaded correctly using a relative path and defer -->
-  <script defer type="module" src="./src/index.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ramen Rater</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script defer src="./src/index.js"></script>
 </head>
 
 <body>
-  <header>
-    <h1>Ramen Rater</h1>
-  </header>
+    <header>
+        <h1>Ramen Rater</h1>
+    </header>
 
-  <div id="ramen-menu">
-    <!-- This section will be populated dynamically with ramen images -->
-  </div>
+    <div id="ramen-menu">
+        <!-- This section will be populated dynamically with ramen images -->
+    </div>
 
-  <div id="ramen-detail">
-    <img class="detail-image" src="./assets/image-placeholder.jpg" alt="Insert Name Here">
-    <h2 id="name-name" class="name">Insert Name Here</h2>
-    <h3 id="restaurant-name" class="restaurant">Insert Restaurant Here</h3>
-  </div>
+    <div id="ramen-detail">
+        <img class="detail-image" src="./assets/image-placeholder.jpg" alt="Insert Name Here">
+        <h2 id="name-name" class="name">Insert Name Here</h2>
+        <h3 id="restaurant-name" class="restaurant">Insert Restaurant Here</h3>
+    </div>
 
-  <h3>Rating:</h3>
-  <p>
-    <span id="rating-display">Insert rating here</span> / 10
-  </p>
+    <h3>Rating:</h3>
+    <p>
+        <span id="rating-display">Insert rating here</span> / 10
+    </p>
 
-  <h3>Comment:</h3>
-  <p id="comment-display">
-    Insert comment here
-  </p>
+    <h3>Comment:</h3>
+    <p id="comment-display">Insert comment here</p>
 
-  <form id="new-ramen">
-    <h4>Add New Ramen</h4>
-    <label for="new-name">Name: </label>
-    <input type="text" id="new-name" name="name" required>
-    
-    <label for="new-restaurant">Restaurant: </label>
-    <input type="text" id="new-restaurant" name="restaurant" required>
-    
-    <label for="new-image">Image URL: </label>
-    <input type="text" id="new-image" name="image" required>
-    
-    <label for="new-rating">Rating: </label>
-    <input type="number" id="new-rating" name="rating" min="1" max="10" required>
-    
-    <label for="new-comment">Comment: </label>
-    <textarea id="new-comment" name="comment" required></textarea>
-    
-    <input type="submit" id="submit-button" value="Create">
-  </form>
-
+    <form id="new-ramen">
+        <h4>Add New Ramen</h4>
+        <label for="new-name">Name: </label>
+        <input type="text" id="new-name" name="name" required>
+        
+        <label for="new-restaurant">Restaurant: </label>
+        <input type="text" id="new-restaurant" name="restaurant" required>
+        
+        <label for="new-image">Image URL: </label>
+        <input type="text" id="new-image" name="image" required>
+        
+        <label for="new-rating">Rating: </label>
+        <input type="number" id="new-rating" name="rating" min="1" max="10" required>
+        
+        <label for="new-comment">Comment: </label>
+        <textarea id="new-comment" name="comment" required></textarea>
+        
+        <input type="submit" id="submit-button" value="Create">
+    </form>
 </body>
 </html>

@@ -1,47 +1,66 @@
-const ramenAPI = "http://localhost:3000/ramens";
-const ramenMenuDiv = el("ramen-menu");
+const ramenMenuDiv = document.getElementById("ramen-menu");
+document.getElementById("new-ramen").addEventListener("submit", newRamen);
 
-el("new-ramen").addEventListener("submit", newRamenHandler);
+// Fetch existing ramen data and display it
+fetch("http://localhost:3001/ramens")
+  .then(response => response.json())
+  .then(data => {
+    data.forEach(ramen => {
+      displayRamen(ramen);
+    });
+  })
+  .catch(err => console.log(err));
 
-fetch(ramenAPI)
-  .then((res) => res.json())
-  .then(renderRamens);
-
-function renderRamens(ramens) {
-  ramens.forEach(renderRamen);
-}
-
-function renderRamen(ramen) {
+// Function to display each ramen's image in the ramen menu
+function displayRamen(ramen) {
   const ramenImageElement = document.createElement("img");
   ramenImageElement.src = ramen.image;
-
+  ramenImageElement.alt = ramen.name;
+  
   ramenMenuDiv.append(ramenImageElement);
 
-  ramenImageElement.addEventListener("click", () => ramenClickHandler(ramen));
+  // Add click event to each image to display ramen details
+  ramenImageElement.addEventListener("click", () => clickHand(ramen));
 }
 
-function ramenClickHandler(ramen) {
-  el("detail-image").src = ramen.image;
-  el("detail-name").textContent = ramen.name;
-  el("detail-restaurant").textContent = ramen.restaurant;
-  el("rating-display").textContent = ramen.rating;
-  el("comment-display").textContent = ramen.comment;
+// Function to display ramen details when clicked
+function clickHand(ramen) {
+  document.querySelector(".detail-image").src = ramen.image;
+  document.querySelector(".detail-image").alt = ramen.name;  
+  document.getElementById("name-name").textContent = ramen.name;
+  document.getElementById("restaurant-name").textContent = ramen.restaurant;
+  document.getElementById("rating-display").textContent = ramen.rating;
+  document.getElementById("comment-display").textContent = ramen.comment;
 }
 
-function newRamenHandler(e) {
+// Function to handle form submission and add new ramen
+function newRamen(e) {
   e.preventDefault();
 
+  // Collect form data
+  const newRamenForm = new FormData(e.target);
   const newRamen = {
-    comment: e.target['new-comment'].value,
-    image: e.target.image.value,
-    name: e.target.name.value,
-    rating: e.target.rating.value,
-    restaurant: e.target.restaurant.value,
+    name: newRamenForm.get("name"),
+    restaurant: newRamenForm.get("restaurant"),
+    image: newRamenForm.get("image"),
+    rating: newRamenForm.get("rating"),
+    comment: newRamenForm.get("comment")
   };
 
-  renderRamen(newRamen);
-}
-
-function el(id) {
-  return document.getElementById(id);
+  // Send POST request to add the new ramen
+  fetch("http://localhost:3001/ramens", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newRamen)
+  })
+    .then(res => res.json())
+    .then(addedRamen => {
+      // Display the newly added ramen without reloading the page
+      displayRamen(addedRamen);
+      // Reset the form fields
+      e.target.reset();
+    })
+    .catch(err => console.log("Error adding ramen:", err));
 }
